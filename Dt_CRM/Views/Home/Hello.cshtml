@@ -1,14 +1,83 @@
-﻿@{
-    Layout=null;   
+﻿@model Dt_CRM.Models.PointJobRecord
+
+@{
+    Layout=null;
 }
 
+
+@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dt_CRM</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
+
 <body>
-    <h1>@ViewBag.currentTime</h1>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Заявки на ТТ</div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>TT</th>
+                    <th>Адрес</th>
+                    <th>Проблема</th>
+                    <th>Спосіб вирішення</th>
+                    <th>Дата реєстрації</th>
+                    <th>Запланований виїзд</th>
+                    <th>Дата виконання</th>
+                    <th>Коментар</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" asp-for="PointName">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="PointAddress">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="Description">
+                    </td>
+                    <td>
+
+                        <input type="text" class="form-control" asp-for="Solution">
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" asp-for="CreationDate">
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" asp-for="VisitDate">
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" asp-for="CloseDate">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="Comment">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom">Зберегти</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
